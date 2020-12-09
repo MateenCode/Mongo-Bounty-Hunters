@@ -1,1 +1,43 @@
-Please replace this text with ~50 lines of terminal history.
+> db.bounties.updateMany({}, { $set: { lastSeen: "last week" }}, { upsert: true })
+{ "acknowledged" : true, "matchedCount" : 6, "modifiedCount" : 6 }
+> db.bounties.update({ name: "Han Solo" }, { $set: { lastSeen: "yesterday" }}, { upsert: true })
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.bounties.update({ name: "Han Solo"}, { $pull: { hunters: "Dengar" }})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.bounties.update({ ship: "Waverider"}, { $push: { hunters: "Bobba Fett" }})
+WriteResult({ "nMatched" : 0, "nUpserted" : 0, "nModified" : 0 })
+> db.bounties.update({ name: "Malcom Reynolds"}, { $push: { hunters: "Bobba Fett" }})
+WriteResult({ "nMatched" : 0, "nUpserted" : 0, "nModified" : 0 })
+> db.bounties.update({reward: { $gt: 0}}, { $mul: { reward: (2) }}, { multi: true })
+WriteResult({ "nMatched" : 4, "nUpserted" : 0, "nModified" : 4 })
+> db.bounties.update({}, { $inc: { reward: 333333 }}, { multi: true })
+WriteResult({ "nMatched" : 6, "nUpserted" : 0, "nModified" : 6 })
+> db.bounties.find({ captured: false, client: "Ayesha High Priestess of the Sovereign" })
+> db.bounties.find({$or: [{ship: "Waverider"}, {ship: "Serenity"}]})
+{ "_id" : ObjectId("5fd02af9773bf77a07ea1c69"), "name" : "Malcolm Reynolds", "wantedFor" : "Aiming to misbehave", "client" : "The Alliance", "reward" : 413333, "ship" : "Serenity", "hunters" : [ "Jubal Early" ], "captured" : false, "lastSeen" : "last week" }
+> db.bounties.find({ hunters: "Nebula" })
+> db.bounties.find({ hunters: "Nebula" })
+> db.bounties.find( { reward: { $lte: 1000 } })
+> 
+> db.bounties.find( { reward: { $lte: 1000 } })
+> 
+> db.bounties.find( { reward: { $lt: 1000 } })
+> db.bounties.find( { reward: { $lt: 1000 } })
+> db.bounties.find({ reward: {  $gt: 100000 } })
+{ "_id" : ObjectId("5fd02ac7773bf77a07ea1c65"), "name" : "Han Solo", "wantedFor" : "Owing money", "client" : "Jabba the Hut", "reward" : 2333333, "ship" : "Millennium Falcon", "hunters" : [ "Bobba Fett", "IG-88", "Zuckuss", "Greedo", "Bossk", "4-LOM" ], "captured" : false, "lastSeen" : "yesterday" }
+{ "_id" : ObjectId("5fd02af9773bf77a07ea1c66"), "name" : "Han Solo", "wantedFor" : "Owing money", "client" : "Jabba the Hut", "reward" : 2333333, "ship" : "Millennium Falcon", "hunters" : [ "Bobba Fett", "Dengar", "IG-88", "Zuckuss", "Greedo", "Bossk", "4-LOM" ], "captured" : false, "lastSeen" : "last week" }
+{ "_id" : ObjectId("5fd02af9773bf77a07ea1c67"), "ship" : "The Milano 2", "lastSeen" : "last week", "reward" : 333333 }
+{ "_id" : ObjectId("5fd02af9773bf77a07ea1c68"), "name" : "White Canary", "lastSeen" : "last week", "reward" : 333333 }
+{ "_id" : ObjectId("5fd02af9773bf77a07ea1c69"), "name" : "Malcolm Reynolds", "wantedFor" : "Aiming to misbehave", "client" : "The Alliance", "reward" : 413333, "ship" : "Serenity", "hunters" : [ "Jubal Early" ], "captured" : false, "lastSeen" : "last week" }
+{ "_id" : ObjectId("5fd02af9773bf77a07ea1c6a"), "name" : "Starbuck", "wantedFor" : "Disobeying Captain's orders", "client" : "Captain Adama", "ship" : "Demetrius", "reward" : 335333, "hunters" : [ "Apollo" ], "captured" : true, "lastSeen" : "last week" }
+> tail -50 ~/.dbshell
+uncaught exception: SyntaxError: unexpected token: '~' :
+@(shell):1:9
+> tail -50 ~/.dbshell
+uncaught exception: SyntaxError: unexpected token: '~' :
+@(shell):1:9
+> tail -50 /.dbshell
+uncaught exception: SyntaxError: expected expression, got '.' :
+@(shell):1:10
+> 
+
